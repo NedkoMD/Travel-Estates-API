@@ -1,6 +1,9 @@
-﻿namespace TravelEstates.Data.Abstraction.Repositories
+﻿using TravelEstates.Data.Abstraction.Repositories.Base;
+using TravelEstates.Data.Models.Entities.Base;
+
+namespace TravelEstates.Data.Abstraction.Repositories
 {
-    public interface IRentPropertyRepository
+    public interface IRentPropertyRepository : IRepository<RentProperty>
     {
     }
 }
