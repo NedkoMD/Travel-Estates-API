@@ -2,6 +2,7 @@
 {
     public class Booking
     {
+        public string Id { get; set; }
         // Composite key
         public string RentPropertyId { get; set; }
 
