@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TravelEstates.Business\TravelEstates.Business.csproj" />
+    <ProjectReference Include="..\TravelEstates.Data\TravelEstates.Data.csproj" />
   </ItemGroup>
 
 </Project>

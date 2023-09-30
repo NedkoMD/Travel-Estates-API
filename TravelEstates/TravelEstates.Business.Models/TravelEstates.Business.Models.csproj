@@ -11,4 +11,9 @@
     <ProjectReference Include="..\TravelEstates.Data\TravelEstates.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Utilities\" />
+    <Folder Include="Options\" />
+  </ItemGroup>
+
 </Project>
