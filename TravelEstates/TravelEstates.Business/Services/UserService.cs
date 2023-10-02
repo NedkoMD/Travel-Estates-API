@@ -1,6 +1,8 @@
-﻿namespace TravelEstates.Business.Services
+﻿using TravelEstates.Business.Abstraction.Services;
+
+namespace TravelEstates.Business.Services
 {
-    internal class UserService
+    public class UserService : IUserService
     {
     }
 }
