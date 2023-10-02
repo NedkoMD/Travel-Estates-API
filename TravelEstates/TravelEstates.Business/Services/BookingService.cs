@@ -31,22 +31,22 @@ namespace TravelEstates.Business.Services
             _userRepository = userRepository;
         }
 
-        public async Task<IResult<ICollection<BookingResultDTO>>> GetAllAsync(string userId)
+        public async Task<IResult<IEnumerable<BookingResultDTO>>> GetAllAsync(string userId)
         {
             var userExists = await _userRepository.UserExistsAsync(userId);
 
             if (!userExists)
             {
-                var notFoundResult = _resultFactory.GetNotFoundResult<ICollection<BookingResultDTO>>(BookingMessages.UserNotFound);
+                var notFoundResult = _resultFactory.GetNotFoundResult<IEnumerable<BookingResultDTO>>(BookingMessages.UserNotFound);
                 return notFoundResult;
             }
 
             var bookings = await _bookingRepository.GetAllAsync(b => userId == b.UserId);
-            var bookingResultDTO = _mapper.Map<ICollection<BookingResultDTO>>(bookings);
+            var bookingResultDTO = _mapper.Map<IEnumerable<BookingResultDTO>>(bookings);
 
             if (!bookingResultDTO.Any())
             {
-                var notFoundResult = _resultFactory.GetNotFoundResult<ICollection<BookingResultDTO>>(BookingMessages.BookingNotFoundForUser);
+                var notFoundResult = _resultFactory.GetNotFoundResult<IEnumerable<BookingResultDTO>>(BookingMessages.BookingNotFoundForUser);
                 return notFoundResult;
             }
 

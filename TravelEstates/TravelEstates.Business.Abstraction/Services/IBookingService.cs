@@ -5,7 +5,7 @@ namespace TravelEstates.Business.Abstraction.Services
 {
     public interface IBookingService
     {
-        Task<IResult<ICollection<BookingResultDTO>>> GetAllAsync(string userId);
+        Task<IResult<IEnumerable<BookingResultDTO>>> GetAllAsync(string userId);
 
         public Task<IResult<BookingResultDTO>> GetByIdAsync(string id);
 
