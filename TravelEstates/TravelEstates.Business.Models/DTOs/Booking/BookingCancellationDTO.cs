@@ -1,4 +1,4 @@
-﻿namespace TravelEstates.Business.Models.DTOs
+﻿namespace TravelEstates.Business.Models.DTOs.Booking
 {
     public class BookingCancellationDTO
     {

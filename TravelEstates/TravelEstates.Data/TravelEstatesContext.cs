@@ -18,6 +18,8 @@ public class TravelEstatesContext : IdentityDbContext<User, Role, string>
 
     public DbSet<Token> Tokens { get; set; }
 
+    public DbSet<User> Users { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

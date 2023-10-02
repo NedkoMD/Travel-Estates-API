@@ -5,5 +5,6 @@ namespace TravelEstates.Data.Abstraction.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
+        public Task<bool> UserExistsAsync(string userId);
     }
 }

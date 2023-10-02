@@ -1,6 +1,6 @@
 ﻿namespace TravelEstates.Business.Abstraction.Services
 {
-    internal interface ITokenService
+    public interface ITokenService
     {
     }
 }
