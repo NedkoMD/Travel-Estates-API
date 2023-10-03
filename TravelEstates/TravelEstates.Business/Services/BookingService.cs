@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
-using AutoMapper.Configuration;
-using System.ComponentModel.DataAnnotations;
 using TravelEstates.Business.Abstraction.Factories;
 using TravelEstates.Business.Abstraction.Services;
-using TravelEstates.Business.Models.DTOs.Booking;
+using TravelEstates.Business.Models.DTOs.BookingDTOs;
 using TravelEstates.Business.Models.Results.Base;
 using TravelEstates.Business.Models.Utilities;
 using TravelEstates.Data.Abstraction.Repositories;
 using TravelEstates.Data.Models.Entities.Base;
-using TravelEstates.Data.Repositories;
 
 namespace TravelEstates.Business.Services
 {
@@ -37,7 +34,8 @@ namespace TravelEstates.Business.Services
 
             if (!userExists)
             {
-                var notFoundResult = _resultFactory.GetNotFoundResult<IEnumerable<BookingResultDTO>>(BookingMessages.UserNotFound);
+                var notFoundResult = _resultFactory.GetNotFoundResult<IEnumerable<BookingResultDTO>>(BookingDTOMessages.UserNotFound);
+
                 return notFoundResult;
             }
 
@@ -46,7 +44,8 @@ namespace TravelEstates.Business.Services
 
             if (!bookingResultDTO.Any())
             {
-                var notFoundResult = _resultFactory.GetNotFoundResult<IEnumerable<BookingResultDTO>>(BookingMessages.BookingNotFoundForUser);
+                var notFoundResult = _resultFactory.GetNotFoundResult<IEnumerable<BookingResultDTO>>(BookingDTOMessages.BookingNotFoundForUser);
+
                 return notFoundResult;
             }
 
@@ -61,7 +60,7 @@ namespace TravelEstates.Business.Services
 
             if (booking == null)
             {
-                var notFoundResult = _resultFactory.GetNotFoundResult<BookingResultDTO>(BookingMessages.BookingNotFound);
+                var notFoundResult = _resultFactory.GetNotFoundResult<BookingResultDTO>(BookingDTOMessages.BookingNotFound);
 
                 return notFoundResult;
             }
@@ -72,11 +71,11 @@ namespace TravelEstates.Business.Services
             return okResult;
         }
 
-        public async Task<IResult<BookingResultDTO>> AddAsync(BookingAddDTO bookingAddDTO)
+        public async Task<IResult<BookingResultDTO>> AddAsync(BookingCreateDTO bookingAddDTO)
         {
             if (bookingAddDTO.CheckInDate >= bookingAddDTO.CheckOutDate)
             {
-                var badRequestResult = _resultFactory.GetBadRequestResult<BookingResultDTO>(BookingMessages.CheckInDateNotBeforeCheckOutDate);
+                var badRequestResult = _resultFactory.GetBadRequestResult<BookingResultDTO>(BookingDTOMessages.CheckInDateNotBeforeCheckOutDate);
 
                 return badRequestResult;
             }
@@ -97,7 +96,7 @@ namespace TravelEstates.Business.Services
 
             if (existingBooking == null)
             {
-                var notFoundResult = _resultFactory.GetNotFoundResult<BookingResultDTO>(BookingMessages.BookingNotFound);
+                var notFoundResult = _resultFactory.GetNotFoundResult<BookingResultDTO>(BookingDTOMessages.BookingNotFound);
                 return notFoundResult;
             }
 
@@ -111,23 +110,22 @@ namespace TravelEstates.Business.Services
             return updatedResult;
         }
 
-        public async Task<IResult<BookingCancellationDTO>> DeleteAsync(string id)
+        public async Task<IResult<BookingDeleteDTO>> DeleteAsync(string id)
         {
             var existingBooking = await _bookingRepository.FindEntityAsync(b => b.Id == id);
 
             if (existingBooking == null)
             {
-                var notFoundResult = _resultFactory.GetNotFoundResult<BookingCancellationDTO>(BookingMessages.BookingNotFound);
+                var notFoundResult = _resultFactory.GetNotFoundResult<BookingDeleteDTO>(BookingDTOMessages.BookingNotFound);
 
                 return notFoundResult;
             }
 
             await _bookingRepository.DeleteAsync(existingBooking);
 
-            var okResult = _resultFactory.GetOkResult<BookingCancellationDTO>();
+            var okResult = _resultFactory.GetOkResult<BookingDeleteDTO>();
 
             return okResult;
         }
-
     }
 }

@@ -52,5 +52,11 @@ namespace TravelEstates.Data.Repositories.Base
             _travelEstatesContext.Set<TEntity>().Remove(entity);
             await _travelEstatesContext.SaveChangesAsync();
         }
+
+        public virtual async Task DeleteRangeAsync(IEnumerable<TEntity> entities)
+        {
+            _travelEstatesContext.Set<TEntity>().RemoveRange(entities);
+            await _travelEstatesContext.SaveChangesAsync();
+        }
     }
 }

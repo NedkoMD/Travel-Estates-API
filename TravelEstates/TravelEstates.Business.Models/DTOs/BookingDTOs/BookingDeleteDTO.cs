@@ -1,6 +1,6 @@
-﻿namespace TravelEstates.Business.Models.DTOs.Booking
+﻿namespace TravelEstates.Business.Models.DTOs.BookingDTOs
 {
-    public class BookingCancellationDTO
+    public class BookingDeleteDTO
     {
         public string RentPropertyId { get; set; }
 

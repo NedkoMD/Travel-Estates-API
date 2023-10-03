@@ -10,6 +10,8 @@ namespace TravelEstates.Data.Abstraction.Repositories.Base
 
         Task DeleteAsync(T entity);
 
+        Task DeleteRangeAsync(IEnumerable<T> entities);
+
         Task<T> FindEntityAsync(Expression<Func<T, bool>> expression);
 
         Task<ICollection<T>> GetAllAsync(Expression<Func<T, bool>> expression);
