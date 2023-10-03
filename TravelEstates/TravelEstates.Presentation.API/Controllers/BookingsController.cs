@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TravelEstates.Business.Abstraction.Services;
-using TravelEstates.Business.Models.DTOs.Booking;
+using TravelEstates.Business.Models.DTOs.BookingDTOs;
 using TravelEstates.Presentation.API.Extensions;
 
 namespace TravelEstates.API.Controllers
@@ -33,7 +33,7 @@ namespace TravelEstates.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync([FromBody] BookingAddDTO bookingAddDTO)
+        public async Task<IActionResult> AddAsync([FromBody] BookingCreateDTO bookingAddDTO)
         {
             var result = await _bookingService.AddAsync(bookingAddDTO);
             

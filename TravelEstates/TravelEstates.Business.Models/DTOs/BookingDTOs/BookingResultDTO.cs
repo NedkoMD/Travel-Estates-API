@@ -1,6 +1,6 @@
 ﻿using TravelEstates.Data.Models.Entities.Base;
 
-namespace TravelEstates.Business.Models.DTOs.Booking
+namespace TravelEstates.Business.Models.DTOs.BookingDTOs
 {
     public class BookingResultDTO
     {

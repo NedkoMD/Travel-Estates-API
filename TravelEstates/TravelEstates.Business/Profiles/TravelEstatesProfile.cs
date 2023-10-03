@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using TravelEstates.Business.Models.DTOs.Booking;
+using TravelEstates.Business.Models.DTOs.BookingDTOs;
+using TravelEstates.Business.Models.DTOs.UserDTOs;
 using TravelEstates.Data.Models.Entities.Base;
 
 namespace TravelEstates.Business.Profiles
@@ -8,13 +9,22 @@ namespace TravelEstates.Business.Profiles
     {
         public TravelEstatesProfile()
         {
-            CreateMap<Booking, BookingAddDTO>()
+            CreateMap<Booking, BookingCreateDTO>()
                 .ReverseMap();
-            CreateMap<Booking, BookingCancellationDTO>()
+            CreateMap<Booking, BookingDeleteDTO>()
                 .ReverseMap();
             CreateMap<Booking, BookingUpdateDTO>()
                 .ReverseMap();
             CreateMap<Booking, BookingResultDTO>()
+                .ReverseMap();
+
+            CreateMap<User, UserRegistrationDTO>()
+                .ReverseMap();
+            CreateMap<User, UserDeleteDTO>()
+                .ReverseMap();
+            CreateMap<User, UserUpdateDTO>()
+                .ReverseMap();
+            CreateMap<User, UserResultDTO>()
                 .ReverseMap();
         }
     }

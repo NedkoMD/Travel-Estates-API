@@ -1,6 +1,6 @@
 ﻿namespace TravelEstates.Business.Models.Utilities
 {
-    public static class BookingMessages
+    public static class BookingDTOMessages
     {
         public const string BookingNotFound = "Booking not found.";
         public const string BookingNotFoundForUser = "There are no bookings for this user.";
