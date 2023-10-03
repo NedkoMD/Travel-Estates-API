@@ -8,33 +8,25 @@ namespace TravelEstates.Presentation.API.Extensions
     {
         public static IActionResult HandleResponse<T>(this ControllerBase controller, IResult<T> response)
         {
-            if (response.StatusCode == TravelEstatesStatusCode.NotFound)
+            switch (response.StatusCode)
             {
-                return controller.NotFound(response.ErrorMessages);
-            }
-            else if (response.StatusCode == TravelEstatesStatusCode.BadRequest)
-            {
-                return controller.BadRequest(response.ErrorMessages);
-            }
-            else if (response.StatusCode == TravelEstatesStatusCode.Unauthorized)
-            {
-                return controller.Unauthorized(response.ErrorMessages);
-            }
-            else if (response.StatusCode == TravelEstatesStatusCode.Forbidden)
-            {
-                return controller.Forbid();
-            }
-            else if (response.StatusCode == TravelEstatesStatusCode.OK)
-            {
-                return controller.Ok(response.Data);
-            }
-            else if (response.StatusCode == TravelEstatesStatusCode.NoContent)
-            {
-                return controller.NoContent();
-            }
-            else
-            {
-                throw new Exception();
+                case TravelEstatesStatusCode.NotFound:
+                    return controller.NotFound(response.ErrorMessages);
+
+                case TravelEstatesStatusCode.BadRequest:
+                    return controller.BadRequest(response.ErrorMessages);
+
+                case TravelEstatesStatusCode.Unauthorized:
+                    return controller.Unauthorized(response.ErrorMessages);
+
+                case TravelEstatesStatusCode.Forbidden:
+                    return controller.Forbid();
+
+                case TravelEstatesStatusCode.NoContent:
+                    return controller.NoContent();
+
+                default:
+                    return controller.Ok(response.Data);
             }
         }
     }
