@@ -11,6 +11,9 @@ namespace TravelEstates.Data.EntityConfigurations
             // Key configuration
             builder.HasKey(rp => rp.Id);
 
+            builder.Property(rp => rp.Id)
+                .ValueGeneratedOnAdd();
+
             // PropertyTypeId property configuration
             builder.Property(rp => rp.PropertyTypeId)
                 .IsRequired();
