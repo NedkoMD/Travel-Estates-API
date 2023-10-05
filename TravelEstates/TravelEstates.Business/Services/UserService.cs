@@ -28,15 +28,15 @@ namespace TravelEstates.Business.Services
             _userRepository = userRepository;
         }
 
-        public async Task<IResult<IEnumerable<UserResultDTO>>> GetAllAsync()
+        public async Task<IResult<ICollection<UserResultDTO>>> GetAllAsync()
         {
             var users = await _userRepository.GetAllAsync(u => true);
 
-            var userResultDTOs = _mapper.Map<IEnumerable<UserResultDTO>>(users);
+            var userResultDTOs = _mapper.Map<ICollection<UserResultDTO>>(users);
 
             if (!userResultDTOs.Any())
             {
-                var notFoundResult = _resultFactory.GetNotFoundResult<IEnumerable<UserResultDTO>>(UserDTOMessages.UsersNotFound);
+                var notFoundResult = _resultFactory.GetNotFoundResult<ICollection<UserResultDTO>>(UserDTOMessages.UsersNotFound);
                 return notFoundResult;
             }
 

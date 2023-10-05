@@ -17,9 +17,9 @@ namespace TravelEstates.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync([FromQuery] string userId)
+        public async Task<IActionResult> GetAllByUserIdAsync([FromQuery] string userId)
         {
-            var result = await _bookingService.GetAllAsync(userId);
+            var result = await _bookingService.GetAllByUserIdAsync(userId);
 
             return this.HandleResponse(result);
         }

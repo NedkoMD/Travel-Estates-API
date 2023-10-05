@@ -2,8 +2,6 @@
 {
     public class BookingUpdateDTO
     {
-        public string Id { get; set; }
-
         public string RentPropertyId { get; set; }
 
         public string UserId { get; set; }
