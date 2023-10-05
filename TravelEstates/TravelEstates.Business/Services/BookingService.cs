@@ -28,28 +28,28 @@ namespace TravelEstates.Business.Services
             _userRepository = userRepository;
         }
 
-        public async Task<IResult<IEnumerable<BookingResultDTO>>> GetAllAsync(string userId)
+        public async Task<IResult<ICollection<BookingResultDTO>>> GetAllByUserIdAsync(string userId)
         {
             var userExists = await _userRepository.UserExistsAsync(userId);
 
             if (!userExists)
             {
-                var notFoundResult = _resultFactory.GetNotFoundResult<IEnumerable<BookingResultDTO>>(BookingDTOMessages.UserNotFound);
+                var notFoundResult = _resultFactory.GetNotFoundResult<ICollection<BookingResultDTO>>(BookingDTOMessages.UserNotFound);
 
                 return notFoundResult;
             }
 
             var bookings = await _bookingRepository.GetAllAsync(b => userId == b.UserId);
-            var bookingResultDTO = _mapper.Map<IEnumerable<BookingResultDTO>>(bookings);
+            var bookingResultDTOs = _mapper.Map<ICollection<BookingResultDTO>>(bookings);
 
-            if (!bookingResultDTO.Any())
+            if (!bookingResultDTOs.Any())
             {
-                var notFoundResult = _resultFactory.GetNotFoundResult<IEnumerable<BookingResultDTO>>(BookingDTOMessages.BookingNotFoundForUser);
+                var notFoundResult = _resultFactory.GetNotFoundResult<ICollection<BookingResultDTO>>(BookingDTOMessages.BookingNotFoundForUser);
 
                 return notFoundResult;
             }
 
-            return _resultFactory.GetOkResult(bookingResultDTO);
+            return _resultFactory.GetOkResult(bookingResultDTOs);
         }
 
 

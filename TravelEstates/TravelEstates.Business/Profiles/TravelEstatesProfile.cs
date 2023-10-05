@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TravelEstates.Business.Models.DTOs.BookingDTOs;
+using TravelEstates.Business.Models.DTOs.RentPropertyDTOs;
 using TravelEstates.Business.Models.DTOs.UserDTOs;
 using TravelEstates.Data.Models.Entities.Base;
 
@@ -25,6 +26,15 @@ namespace TravelEstates.Business.Profiles
             CreateMap<User, UserUpdateDTO>()
                 .ReverseMap();
             CreateMap<User, UserResultDTO>()
+                .ReverseMap();
+
+            CreateMap<RentProperty, RentPropertyCreateDTO>()
+                .ReverseMap();
+            CreateMap<RentProperty, RentPropertyDeleteDTO>()
+                .ReverseMap();
+            CreateMap<RentProperty, RentPropertyUpdateDTO>()
+                .ReverseMap();
+            CreateMap<RentProperty, RentPropertyResultDTO>()
                 .ReverseMap();
         }
     }
