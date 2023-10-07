@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TravelEstates.Data.Migrations
 {
     [DbContext(typeof(TravelEstatesContext))]
-    partial class TravelEstatesContextModelSnapshot : ModelSnapshot
+    [Migration("20231007150224_Added primary key Id to Booking table")]
+    partial class AddedprimarykeyIdtoBookingtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,8 +132,10 @@ namespace TravelEstates.Data.Migrations
 
             modelBuilder.Entity("TravelEstates.Data.Models.Entities.Base.Booking", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("RentPropertyId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CheckInDate")
@@ -139,17 +144,11 @@ namespace TravelEstates.Data.Migrations
                     b.Property<DateTime>("CheckOutDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("RentPropertyId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasAlternateKey("RentPropertyId", "UserId");
+                    b.HasKey("RentPropertyId", "UserId");
 
                     b.HasIndex("UserId");
 

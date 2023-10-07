@@ -15,17 +15,20 @@ namespace TravelEstates.Business.Services
         private readonly IResultFactory _resultFactory;
         private readonly IBookingRepository _bookingRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IRentPropertyRepository _rentPropertyRepository;
 
         public BookingService(
             IMapper mapper, 
             IResultFactory resultFactory, 
             IBookingRepository bookingRepository,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            IRentPropertyRepository rentPropertyRepository)
         {
             _mapper = mapper;
             _resultFactory = resultFactory;
             _bookingRepository = bookingRepository;
             _userRepository = userRepository;
+            _rentPropertyRepository = rentPropertyRepository;
         }
 
         public async Task<IResult<ICollection<BookingResultDTO>>> GetAllByUserIdAsync(string userId)

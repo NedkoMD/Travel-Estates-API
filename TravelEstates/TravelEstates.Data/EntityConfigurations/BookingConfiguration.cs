@@ -8,8 +8,13 @@ namespace TravelEstates.Data.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Booking> builder)
         {
+            builder.HasKey(b => b.Id);
+
+            builder.Property(b => b.Id)
+                .ValueGeneratedOnAdd();
+
             // Composite key configuration
-            builder.HasKey(b => new { b.RentPropertyId, b.UserId });
+            builder.HasAlternateKey(b => new { b.RentPropertyId, b.UserId });
 
             // Date properties configuration
             builder.Property(b => b.CheckInDate)
