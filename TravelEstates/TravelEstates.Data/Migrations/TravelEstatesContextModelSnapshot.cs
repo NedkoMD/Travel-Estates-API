@@ -149,7 +149,7 @@ namespace TravelEstates.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("RentPropertyId", "UserId");
+                    b.HasIndex("RentPropertyId");
 
                     b.HasIndex("UserId");
 
