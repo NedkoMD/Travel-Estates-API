@@ -13,8 +13,11 @@ namespace TravelEstates.Data.EntityConfigurations
             builder.Property(b => b.Id)
                 .ValueGeneratedOnAdd();
 
-            // Composite key configuration
-            builder.HasAlternateKey(b => new { b.RentPropertyId, b.UserId });
+            builder.Property(b => b.RentPropertyId)
+                .IsRequired();
+
+            builder.Property(b => b.UserId)
+                .IsRequired();
 
             // Date properties configuration
             builder.Property(b => b.CheckInDate)

@@ -18,6 +18,10 @@ namespace TravelEstates.Business.Profiles
                 .ReverseMap();
             CreateMap<Booking, BookingResultDTO>()
                 .ReverseMap();
+            CreateMap<Booking, BookingResultDTO>()
+                .ForMember(dest => dest.RentPropertyName, opt => opt.MapFrom(src => src.RentProperty.Name))
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName));
+
 
             CreateMap<User, UserRegistrationDTO>()
                 .ReverseMap();
