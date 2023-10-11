@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace TravelEstates.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigrate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -220,6 +222,7 @@ namespace TravelEstates.Data.Migrations
                 name: "Bookings",
                 columns: table => new
                 {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RentPropertyId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CheckInDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -227,7 +230,7 @@ namespace TravelEstates.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bookings", x => new { x.RentPropertyId, x.UserId });
+                    table.PrimaryKey("PK_Bookings", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Bookings_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -240,6 +243,18 @@ namespace TravelEstates.Data.Migrations
                         principalTable: "RentingProperties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "PropertyTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { "1", "Flat" },
+                    { "2", "House" },
+                    { "3", "Single room" },
+                    { "4", "Hotel room" },
+                    { "5", "Boat cabin" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -280,6 +295,11 @@ namespace TravelEstates.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bookings_RentPropertyId",
+                table: "Bookings",
+                column: "RentPropertyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_UserId",

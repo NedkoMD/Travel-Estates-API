@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TravelEstates.Data.Migrations
 {
     [DbContext(typeof(TravelEstatesContext))]
-    [Migration("20231005131948_pk Id Removed from RentProperty")]
-    partial class pkIdRemovedfromRentProperty
+    [Migration("20231011170034_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -132,10 +132,8 @@ namespace TravelEstates.Data.Migrations
 
             modelBuilder.Entity("TravelEstates.Data.Models.Entities.Base.Booking", b =>
                 {
-                    b.Property<string>("RentPropertyId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserId")
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CheckInDate")
@@ -144,10 +142,17 @@ namespace TravelEstates.Data.Migrations
                     b.Property<DateTime>("CheckOutDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("RentPropertyId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("RentPropertyId", "UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RentPropertyId");
 
                     b.HasIndex("UserId");
 
@@ -199,6 +204,7 @@ namespace TravelEstates.Data.Migrations
             modelBuilder.Entity("TravelEstates.Data.Models.Entities.Base.RentProperty", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")

@@ -6,8 +6,6 @@ namespace TravelEstates.Business.Models.DTOs.RentPropertyDTOs
     {
         public string Id { get; set; }
 
-        public string PropertyTypeId { get; set; }
-
         public string PropertyTypeName { get; set; }
 
         public string Name { get; set; }

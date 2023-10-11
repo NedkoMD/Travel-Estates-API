@@ -1,6 +1,4 @@
-﻿using TravelEstates.Data.Models.Entities.Base;
-
-namespace TravelEstates.Business.Models.DTOs.BookingDTOs
+﻿namespace TravelEstates.Business.Models.DTOs.BookingDTOs
 {
     public class BookingResultDTO
     {
@@ -10,8 +8,8 @@ namespace TravelEstates.Business.Models.DTOs.BookingDTOs
 
         public DateTime CheckOutDate { get; set; }
 
-        public RentProperty? RentProperty { get; set; }
+        public string RentPropertyName { get; set; }
 
-        public User? User { get; set; }
+        public string UserName { get; set; }
     }
 }

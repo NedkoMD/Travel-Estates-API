@@ -20,7 +20,8 @@ namespace TravelEstates.Business.Services
             IMapper mapper, 
             IResultFactory resultFactory, 
             IBookingRepository bookingRepository,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            IRentPropertyRepository rentPropertyRepository)
         {
             _mapper = mapper;
             _resultFactory = resultFactory;
@@ -35,39 +36,42 @@ namespace TravelEstates.Business.Services
             if (!userExists)
             {
                 var notFoundResult = _resultFactory.GetNotFoundResult<ICollection<BookingResultDTO>>(BookingDTOMessages.UserNotFound);
-
                 return notFoundResult;
             }
 
-            var bookings = await _bookingRepository.GetAllAsync(b => userId == b.UserId);
+            var bookings = await _bookingRepository.GetAllAsync(b => b.UserId == userId);
             var bookingResultDTOs = _mapper.Map<ICollection<BookingResultDTO>>(bookings);
 
             if (!bookingResultDTOs.Any())
             {
                 var notFoundResult = _resultFactory.GetNotFoundResult<ICollection<BookingResultDTO>>(BookingDTOMessages.BookingNotFoundForUser);
-
                 return notFoundResult;
             }
 
             return _resultFactory.GetOkResult(bookingResultDTOs);
         }
 
-
-
         public async Task<IResult<BookingResultDTO>> GetByIdAsync(string id)
         {
-            var booking = await _bookingRepository.FindEntityAsync(b => b.Id == id);
+            var booking = await _bookingRepository.GetByIdAsync(id);
 
             if (booking == null)
             {
                 var notFoundResult = _resultFactory.GetNotFoundResult<BookingResultDTO>(BookingDTOMessages.BookingNotFound);
-
                 return notFoundResult;
             }
 
-            var bookingResultDTO = _mapper.Map<BookingResultDTO>(booking);
-            var okResult = _resultFactory.GetOkResult<BookingResultDTO>();
+            // Map the retrieved Booking entity to the BookingResultDTO
+            var bookingResultDTO = new BookingResultDTO
+            {
+                Id = booking.Id,
+                CheckInDate = booking.CheckInDate,
+                CheckOutDate = booking.CheckOutDate,
+                RentPropertyName = booking.RentProperty.Name,
+                UserName = booking.User.FirstName + " " + booking.User.LastName
+            };
 
+            var okResult = _resultFactory.GetOkResult(bookingResultDTO);
             return okResult;
         }
 
